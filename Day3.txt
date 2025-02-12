@@ -1,0 +1,79 @@
+Day 3
+
+Ques 1:  Move Zeroes – Shift all zeroes to the end while maintaining the order of other elements.
+Solution:-
+
+void moveZeroes(vector<int>& nums) {
+        int count = 0;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] != 0){
+                if(nums[count] == 0) {
+                    swap(nums[i], nums[count]);
+                }
+                count++;
+            }
+        }
+    }
+
+Ques 2:  Remove Duplicates from Sorted Array – Modify the array in-place to remove duplicates.
+Solution:-
+
+int removeDuplicates(vector<int>& nums) {
+        int i=0;
+        for(int j=0;j<nums.size();j++){
+            if(nums[j]!=nums[i]){
+                nums[i+1]=nums[j];
+                i++;
+            }
+        }
+        return i+1;
+        
+        }
+
+Ques 3:  Rotate Array – Rotate elements to the right by k positions.
+Solution:-
+
+void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k = k % n; // Handle cases where k >= n
+        // Reverse the entire array
+        reverse(nums.begin(), nums.end());
+        // Reverse the first k elements
+        reverse(nums.begin(), nums.begin() + k);
+        // Reverse the remaining n-k elements
+        reverse(nums.begin() + k, nums.end());
+    }
+
+Another method:--
+
+void rotate(vector<int>& nums, int k) {
+    int n = nums.size();
+    k = k % n; 
+    if (k == 0) return;  
+    vector<int> ans;  
+
+    // Copy the last k elements of nums to the beginning of ans
+    for (int i = n - k; i < n; i++) {
+        ans.push_back(nums[i]);
+    }
+
+    // Copy the first n - k elements of nums to the end of ans
+    for (int i = 0; i < n - k; i++) {
+        ans.push_back(nums[i]);
+    }
+
+    // Update nums
+    nums = ans;
+}
+
+Ques 4:  Container With Most Water – Find two lines that hold the most water.
+Solution:-
+
+Ques 5:  Interval List Intersections – Find intersections between two interval lists.
+Solution:-
+
+Ques 6:  Next Permutation – Rearrange numbers into the next lexicographical order.
+Solution:-
+
+Ques 7:  Trapping Rain Water – Calculate how much water can be trapped between heights.
+Solution:-

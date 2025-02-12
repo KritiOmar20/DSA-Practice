@@ -1,0 +1,77 @@
+Day 1:
+
+Ques 1: Range Sum Query - Immuatable
+
+Solution:-
+
+class NumArray {
+public:
+    vector<int> nums;
+    NumArray(vector<int>& nums) {
+        this->nums = nums;
+    }
+    
+    int sumRange(int left, int right) {
+        int sum = 0;
+        for (int i=left; i<=right; i++) {
+            sum += nums[i];
+        }
+        return sum;
+    }
+};
+
+Ques 2:  Matrix Block sum
+ 
+Solution:-
+
+Ques 3: sum of absolute difference in a sorted order
+
+Solution :-
+
+Brute force ---
+
+int n = nums.size();
+        vector<int> result(n, 0);
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            for (int j = 0; j < n; j++) {
+                sum += abs(nums[i] - nums[j]);
+            }
+        result[i] = sum;
+    }
+    return result;
+
+TC=O(n2)  TLE
+
+Ques 4 :-
+
+Solution:-
+
+int n = nums.size();
+        int count = 0;
+        int prod = 1;
+        for (int i = 0; i < n; i++)
+        {
+            if (nums[i] != 0){
+                prod *= nums[i];
+            }
+            else{
+                count++;
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (count == 1){
+                if (nums[i] != 0){
+                    nums[i] = 0;
+                }
+                else{
+                    nums[i] = prod;
+                }
+            }else if(count>1){
+                nums[i]=0;
+            }else{
+                nums[i]=prod/nums[i];
+            }
+        }
+        return nums;

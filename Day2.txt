@@ -1,0 +1,116 @@
+Day 2
+
+Ques 1:  Capacity To Ship Packages Within D Days
+Solution :-
+
+bool canShip(const vector<int>& weights, int days, int capacity) {
+    int D = 1;      // Start on day 1
+    int ship = 0;
+    
+    for (int weight : weights) {
+        // If adding this package exceeds the capacity, start a new day.
+        if (ship + weight > capacity) {
+            D++;
+            ship = weight;
+            // If we exceed the allowed number of days, return false.
+            if (D > days) {
+                return false;
+            }
+        } else {
+            ship += weight;
+        }
+    }
+    return true; // All packages can be shipped within days.
+}
+    int shipWithinDays(vector<int>& weights, int days) {
+        int left = *max_element(weights.begin(), weights.end());
+        int right = accumulate(weights.begin(), weights.end(), 0);
+        while (left < right) {
+        int mid = left + (right - left) / 2;
+        // If mid is a valid capacity, try to find a smaller valid capacity.
+        if (canShip(weights, days, mid)) {
+            right = mid;
+        } else {
+            // Otherwise, increase the capacity.
+            left = mid + 1;
+        }
+    }
+    return left;
+    }
+
+
+Ques 2:  Search in Rotated Sorted Array
+Solution :-
+By using linear search –
+int search(vector<int>& nums, int target) {
+        for(int i=0; i<nums.size();i++){
+            if(nums[i] == target){
+                return i;
+            }
+        }
+        return -1;
+    }
+TC => O(n)
+
+By using Binary Search –
+ 
+int search(vector<int>& nums, int target) {
+        int low=0, high = nums.size()-1;
+        while(low<=high){ 
+            int mid = (low+high)/2;
+            if(nums[mid] == target) return mid;
+            if(nums[low]<=nums[mid]){
+                if(nums[low]<=target && target<=nums[mid]) high=mid-1;
+                else low=mid+1;
+            }
+            else{
+                if(nums[mid]<=target && target<=nums[high]){
+                    low = mid+1;
+                }
+                else high = mid-1;
+            }
+        }
+        return -1;
+}
+
+TC=> O(logn)
+
+Ques 3: Maximum Running Time of N Computers
+Solution :--
+
+Ques 4: Find Minimum in Rotated Sorted Array
+Solution :--
+By using linear search:-
+ int findMin(vector<int>& nums) {
+        int ans = INT_MAX;
+        for(int i=0; i< nums.size();i++){
+            ans= min(ans, nums[i]);
+        }
+        return ans;
+    }
+TC => O(N)
+
+By using Binary Search:-
+int findMin(vector<int>& nums) {
+        int low=0, high = nums.size()-1;
+        int ans=INT_MAX;
+        while(low<=high){
+            int mid = (low+high)/2;   
+            if(nums[low]<=nums[mid]){
+                ans = min(ans,nums[low]);
+                low = mid+1;
+            }
+            else{
+               high = mid-1;
+               ans = min(ans,nums[mid]);
+            }
+        }
+        return ans;
+        
+    }
+
+TC => O(logN)
+
+
+Ques 5: Minimum Limit of Balls in a Bag
+Solution :--
