@@ -1,0 +1,116 @@
+Day 4
+
+Ques1 : Spiral Matrix
+Solution:--
+
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+//left as starting column index, right as ending column index
+// top as starting row index, bottom as ending row index
+        int left=0, right = m-1;
+        int top=0, bottom = n-1;
+        vector<int>ans;
+
+        while(top<=bottom && left <= right){
+
+            for(int i=left;i<=right;i++){
+                ans.push_back(matrix[top][i]);
+            }top++;
+
+            for(int i=top;i<=bottom;i++){
+                ans.push_back(matrix[i][right]);
+            }right--;
+
+            if(top<=bottom){  //elements in a single row are traversed can not be travesed again
+                for(int i=right;i>=left;i--){
+                ans.push_back(matrix[bottom][i]);
+            }bottom--;
+
+            }
+            if(left<=right){  // same condition applies for single column
+                for(int i=bottom;i>=top;i--){
+                ans.push_back(matrix[i][left]);
+            }left++;
+            }
+        }return ans;
+    }
+
+Ques2: Rotate Image
+Solution:--
+
+void rotate(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+//transpose the matrix
+        for(int i =0; i<n-1;i++){
+            for(int j =i+1; j<n;j++){
+                swap(matrix[i][j],matrix[j][i]);
+            }
+        }
+//reverse every row
+        for(int i =0; i<n; i++){
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+    }
+Ques 3:Set Matrix Zeros
+
+Solution:--
+
+void setZeroes(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        int m = matrix[0].size();
+        vector<int> row(n, 0);
+        vector<int> col(m, 0);
+// mark the rows and column that need to be zero
+        for(int i=0; i<n;i++){
+            for(int j=0; j<m; j++){
+                if(matrix[i][j] == 0){
+                    row[i] =1;
+                    col[j] =1;
+                }
+            }
+        }
+   // Set matrix elements to zero based on row and col marked
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(row[i] || col[j]){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+}
+
+Ques 4: Spiral Matrix 2
+Solution:--
+
+	int left=0, right = n-1;
+        int top=0, bottom = n-1;
+        vector<vector<int>>matrix(n, vector<int>(n)); //Creates a 2D vector with n rows, where each row is a vector of size n.
+        
+        int val =1;
+        while(top<=bottom && left<=right){
+        
+            for (int i = left; i <= right; ++i){
+                matrix[top][i] = val++;
+            }
+            ++top;
+            for (int i = top; i <= bottom; ++i){
+                matrix[i][right] = val++;
+            }
+            --right;
+            if (top <= bottom) {
+                for (int i = right; i >= left; --i){
+                    matrix[bottom][i] = val++;
+                }
+                --bottom;
+            }
+            if (left <= right) {
+                for (int i = bottom; i >= top; --i){
+                    matrix[i][left] = val++;
+                
+                }
+                ++left;
+            }
+        }
+        return matrix;
+    }
