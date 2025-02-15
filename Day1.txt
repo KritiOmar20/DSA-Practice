@@ -43,7 +43,7 @@ int n = nums.size();
 
 TC=O(n2)  TLE
 
-Ques 4 :-
+Ques 4 :- Product of Array Except Self
 
 Solution:-
 

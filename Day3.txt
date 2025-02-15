@@ -69,8 +69,50 @@ void rotate(vector<int>& nums, int k) {
 Ques 4:  Container With Most Water – Find two lines that hold the most water.
 Solution:-
 
+ int maxArea(vector<int>& height) {
+        int maxWater = 0;
+        int lp =0, rp = height.size()-1;
+        while(lp < rp){
+            int w = rp-lp;
+            int ht = min(height[lp], height[rp]);
+            int currWater = w *ht;
+            maxWater = max(maxWater, currWater);
+
+            // Move the pointer with the smaller height
+            if (height[lp] < height[rp]) {
+                lp++;
+            } else {
+                rp--;  // Fix: Decrement instead of increment
+            }
+        }
+        return maxWater;
+    }
+
 Ques 5:  Interval List Intersections – Find intersections between two interval lists.
 Solution:-
+
+vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
+        vector<vector<int>> ans;
+        int i=0,j=0;
+        int n1 = firstList.size();
+        int n2 = secondList.size();
+        while(i<n1 && j<n2){
+            if(secondList[j][0] <= firstList[i][1] && firstList[i][0] <= secondList[j][1]){
+                // Calculate the start and end of the intersection
+                int start = max(firstList[i][0], secondList[j][0]);
+                int end = min(firstList[i][1], secondList[j][1]);
+                ans.push_back({start, end});
+            }
+            // Move the pointer that has the smaller endpoint, just increasing if the next interval will in the current highest range 
+            // so we incremnet the smallest
+            if(firstList[i][1] < secondList[j][1]){
+                i++;
+            }else{
+                j++;
+            }
+        }
+        return ans;
+    }
 
 Ques 6:  Next Permutation – Rearrange numbers into the next lexicographical order.
 Solution:-
